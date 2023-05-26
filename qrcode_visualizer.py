@@ -10,6 +10,8 @@ import colorsys
 from scipy.spatial.transform import Rotation
 import validators
 import webbrowser
+import os
+from camera_calibration import calib_camera_from_chessboard
 
 
 options = Options()
@@ -92,6 +94,21 @@ def mouse_event_handler(event, x, y, flags, param):
         param[2] = (x, y)
 
 if __name__ == "__main__":
+    calib_file = "./calibration_result.npz"
+    if os.path.exists(calib_file):
+        calib_data = np.load(calib_file)
+
+    else:
+        rms, K, dist_coeff, rvecs, tvecs = calib_camera_from_chessboard(input_file=0, board_pattern=(10, 7), board_cellsize=0.025)
+        calib_data = {
+            "rms": rms,
+            "K": K,
+            "dist_coeff": dist_coeff,
+            "rvecs": rvecs,
+            "tvecs": tvecs
+        }
+        np.savez(calib_file, rms=rms, K=K, dist_coeff=dist_coeff, rvecs=rvecs, tvecs=tvecs)
+
     calib_data = np.load("./calibration_result.npz")
 
     video = cv.VideoCapture(0)
