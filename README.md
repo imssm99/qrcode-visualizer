@@ -34,9 +34,21 @@ python3 qrcode_visualizer.py
 
 ### Web Page
 
+
+https://github.com/imssm99/qrcode-visualizer/assets/15193055/5ffde759-1218-4180-8cad-4fa78d7436b6
+
+
 ### 3D Object
 
+
+https://github.com/imssm99/qrcode-visualizer/assets/15193055/82122f7e-2bb5-4870-b35e-c42b189e5c5b
+
+
 ### Memo
+
+
+https://github.com/imssm99/qrcode-visualizer/assets/15193055/bea05b4b-0d74-4f36-a61e-96b5cd01a354
+
 
 ## Background
 
