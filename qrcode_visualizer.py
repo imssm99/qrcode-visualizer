@@ -32,7 +32,7 @@ def get_website_as_img(url):
 
     else:
         driver.get(url)
-        result = cv.imdecode(np.fromstring(base64.b64decode(driver.get_screenshot_as_base64()), dtype=np.uint8), cv.IMREAD_COLOR)
+        result = cv.imdecode(np.frombuffer(base64.b64decode(driver.get_screenshot_as_base64()), dtype=np.uint8), cv.IMREAD_COLOR)
         cache[url] = result
         driver.close()
 
@@ -142,7 +142,6 @@ if __name__ == "__main__":
 
         if barcodes[0]:
             barcode_cache = [[(data, polygon), 5] for data, polygon in zip(barcodes[1], barcodes[2])]
-            print(barcodes)
 
         for idx in range(len(barcode_cache)):
             if barcode_cache[idx][1]:
