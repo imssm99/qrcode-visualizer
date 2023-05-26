@@ -56,7 +56,7 @@ You can click to draw something on memo qr code
 
 https://github.com/imssm99/qrcode-visualizer/assets/15193055/a3d96be8-a403-4e2a-ae2e-75c5820813aa
 
-![text_popup](./assets/memo_popup.png)
+![text_popup](./assets/text_popup.png)
 You can click rendered text area to open popup
 
 ## Background
