@@ -1,5 +1,4 @@
 import cv2 as cv
-from pyzbar import pyzbar
 import numpy as np
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -26,16 +25,6 @@ COLOR_YELLOW = (0, 255, 255)
 COLOR_BLACK = (0, 0, 0)
 COLOR_WHITE = (255, 255, 255)
 
-def barcode_to_points(barcode):
-    data = {
-        "UP": [0, 1, 2, 3],
-        "LEFT": [0, 1, 2, 3],
-        "RIGHT": [0, 1, 2, 3],
-        "DOWN": [0, 1, 2, 3],
-    }
-
-    return np.array([[barcode.polygon[i].x, barcode.polygon[i].y] for i in data[barcode.orientation]], dtype=np.float32)
-
 cache = {}
 def get_website_as_img(url):
     if url in cache:
@@ -43,7 +32,7 @@ def get_website_as_img(url):
 
     else:
         driver.get(url)
-        result = cv.imdecode(np.fromstring(base64.b64decode(driver.get_screenshot_as_base64()), dtype=np.uint8), cv.IMREAD_COLOR)[::-1]
+        result = cv.imdecode(np.fromstring(base64.b64decode(driver.get_screenshot_as_base64()), dtype=np.uint8), cv.IMREAD_COLOR)
         cache[url] = result
         driver.close()
 
@@ -124,14 +113,14 @@ if __name__ == "__main__":
         [0, 0],
         [1024, 0],
         [1024, 1024],
-        [0, 1024]
+        [0, 1024],
     ], dtype=np.float32)
 
     render_points = np.array([
         [0, 0],
-        [0, 512],
-        [512, 512],
         [512, 0],
+        [512, 512],
+        [0, 512],
     ], dtype=np.float32)
 
     barcode_cache = []
@@ -141,27 +130,30 @@ if __name__ == "__main__":
     cv.namedWindow("QRCode Visualizer")
     cv.setMouseCallback("QRCode Visualizer", mouse_event_handler, mouse_state)
 
+    qrcode_detector = cv.QRCodeDetector()
+
     while True:
         valid, img = video.read()
         mouse_down, mouse_click, mouse_xy = mouse_state
 
         img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
         img_gray = cv.adaptiveThreshold(img_gray, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 99, 4)
-        barcodes = pyzbar.decode(img_gray)
+        barcodes = qrcode_detector.detectAndDecodeMulti(img_gray)
 
-        if barcodes:
-            barcode_cache = [[barcode, 5] for barcode in barcodes]
+        if barcodes[0]:
+            barcode_cache = [[(data, polygon), 5] for data, polygon in zip(barcodes[1], barcodes[2])]
+            print(barcodes)
 
         for idx in range(len(barcode_cache)):
             if barcode_cache[idx][1]:
                 barcode_cache[idx][1] -= 1
 
                 barcode = barcode_cache[idx][0]
-                img_points = barcode_to_points(barcode)
+                img_points = barcode[1]
 
                 ret, rvec, tvec = cv.solvePnP(qr_points, img_points, calib_data["K"], calib_data["dist_coeff"])
                 
-                data = barcode.data.decode()
+                data = barcode[0]
                 if ret:
                     if validators.url(data):
                         if data.endswith(".xyz"): # XYZ 
