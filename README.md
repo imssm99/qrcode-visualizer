@@ -1,11 +1,55 @@
 # QRCode Visualizer
 
-기존의 QRCode 인식 프로그램은 주로 URL을 발견했을 때 주소를 보여주고 클릭 시 연결 되도록 되어 있다.
+## About Project
 
-이는 QRCode의 실제 내용을 직관적으로 파악하기 어렵다는 문제가 있다.
+Most QR code reader programs are designed to display the address when a URL is detected in the QR Code data and open web browser when clicked.
 
-이 프로젝트에서는 QRCode의 내용이 URL이라면 바로 웹 페이지를 렌더링 해 보여주거나, 3D Object라면 그 위에 보여주는 등으로 QRCode가 가지고 있는 정보를 실시간으로 확인할 수 있도록 한다.
+This has a problem that it is difficult to represent the actual information of the QR Code.
+
+In this project, we aim to express QR Code in real-time to make the information more accessible to users.
 
 iPhone Camera | QRCode Visualizer
-:------------:|:------------:
+:---:|:---:
 ![iphone_cam](./assets/iphone_cam.jpeg) | ![sample](./assets/sample.png)
+
+## Getting Started
+
+### Prerequisites
+
+```
+pip3 -r requirements.txt
+```
+
+### Run
+
+```
+python3 qrcode_visualizer.py
+```
+
+- Calibrate camera if no `calibration_result.npz` exists
+- Visualize qrcode!
+
+
+## Features
+
+### Web Page
+
+### 3D Object
+
+### Memo
+
+## Background
+
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+## Dependencies
+
+- Written in [Python3](https://www.python.org)
+- [OpenCV](https://opencv.org) for capture and process video
+- [Selenium](https://www.selenium.dev) for render web page
+
+## References
+
+- [mint-lab/cv_tutorial](https://github.com/mint-lab/cv_tutorial)
