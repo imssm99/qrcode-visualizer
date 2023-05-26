@@ -27,6 +27,10 @@ python3 qrcode_visualizer.py
 ```
 
 - Calibrate camera if no `calibration_result.npz` exists
+- Existing `calibration_result.npz` is calibration data of Logitech C270
+- You need 10x7 25mm checkerboard
+- It calibrates automatically when chessboard recognized
+- `esc`: end calibration
 - Visualize qrcode!
 
 
@@ -34,23 +38,33 @@ python3 qrcode_visualizer.py
 
 ### Web Page
 
-
 https://github.com/imssm99/qrcode-visualizer/assets/15193055/5ffde759-1218-4180-8cad-4fa78d7436b6
 
+You can click rendered web page area to open page in web browser
 
 ### 3D Object
 
-
 https://github.com/imssm99/qrcode-visualizer/assets/15193055/82122f7e-2bb5-4870-b35e-c42b189e5c5b
-
 
 ### Memo
 
-
 https://github.com/imssm99/qrcode-visualizer/assets/15193055/bea05b4b-0d74-4f36-a61e-96b5cd01a354
 
+You can click to draw something on memo qr code
+
+### Text
+
+![text_popup](./assets/memo_popup.png)
+You can click rendered text area to open popup
 
 ## Background
+
+### QR Code
+
+QR Code is 2-dimensional black-white pattern which contains information. It is widely used in representing url, payments, ticket data.
+
+### Image Formation
+
 
 ## License
 
