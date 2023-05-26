@@ -48,7 +48,8 @@ def get_object_as_np(url):
 
         obj = np.interp(obj, (obj.min(), obj.max()), (-1, +1)) # Size normalize
         obj = obj[obj[:,1].argsort()] # For coloring
-        obj_rotation = [90, 0, 90] # Set default rotation
+        
+        obj_rotation = [-90, 0, 0] # Set default rotation
         obj_rvec = Rotation.from_euler('zyx', obj_rotation[::-1], degrees=True).as_matrix()
         obj_tvec = np.array([0.0, 0.0, 0.0]) # Set default position
         obj_result = obj @ obj_rvec + obj_tvec
@@ -138,7 +139,10 @@ if __name__ == "__main__":
 
         img_gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
         img_gray = cv.adaptiveThreshold(img_gray, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 99, 4)
-        barcodes = qrcode_detector.detectAndDecodeMulti(img_gray)
+        try:
+            barcodes = qrcode_detector.detectAndDecodeMulti(img_gray)
+        except:
+            pass
 
         if barcodes[0]:
             barcode_cache = [[(data, polygon), 5] for data, polygon in zip(barcodes[1], barcodes[2])]
@@ -191,7 +195,7 @@ if __name__ == "__main__":
 
                             if mouse_down and cv.pointPolygonTest(point, mouse_xy, False) == 1.0:
                                 xy = cv.perspectiveTransform(np.array([[mouse_xy]], dtype=np.float32), np.linalg.inv(matrix))
-                                cv.circle(render, xy.astype(np.int32).flatten(), 3, COLOR_WHITE, -1)
+                                cv.circle(render, xy.astype(np.int32).flatten(), 10, COLOR_WHITE, -1)
 
                         else: # Normal text
                             point, _ = cv.projectPoints(obj_points, rvec, tvec, calib_data["K"], calib_data["dist_coeff"]) 
