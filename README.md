@@ -59,14 +59,20 @@ https://github.com/imssm99/qrcode-visualizer/assets/15193055/a3d96be8-a403-4e2a-
 ![text_popup](./assets/text_popup.png)
 You can click rendered text area to open popup
 
-## Background
+## How this works
 
 ### QR Code
 
-QR Code is 2-dimensional black-white pattern which contains information. It is widely used in representing url, payments, ticket data.
+- QR Code is 2-dimensional black-white pattern which contains information. It is widely used in representing url, payments, ticket data.
+- OpenCV has feature that can recognize and decode QR Code. 
 
 ### Image Formation
 
+- From camera calibration, we can get camera matrix `K` and distortion coefficient
+- So we can calculate camera pose and project points
+- Render object on projected points
+- Perspective transform makes image warp to projected points
+- In memo feature, we can get mouse point coordinate from inversing transform matrix
 
 ## License
 
