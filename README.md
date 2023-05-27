@@ -12,6 +12,22 @@ iPhone Camera | QRCode Visualizer
 :---:|:---:
 ![iphone_cam](./assets/iphone_cam.jpeg) | ![sample](./assets/sample.png)
 
+## Contents
+
+- calibration_result.npz: Sample calibration result of Logitech C270 
+- camera_calibration.py: Source code for calibrating camera
+- LICENSE.txt: License of the project
+- qrcode_visualizer.py: Main source code of the project
+- README.md: Description of the project
+- requirements.txt: List of the python library that requires to run program
+
+- assets: Images in readme file
+- qrcode_samples: Sample QR Codes
+    - webpage.png: My blog url
+    - box.png, bunny.png: 3D object url that ends with `.xyz` (May not work when my web server down)
+    - paint_1.png, paint_2.png: Text starts with `QRV_PAINT`
+    - text.png, text_multiline.png: Just text which not matches any conditions 
+
 ## Getting Started
 
 ### Prerequisites
@@ -32,7 +48,6 @@ python3 qrcode_visualizer.py
 - It calibrates automatically when chessboard recognized
 - `esc`: end calibration
 - Visualize qrcode!
-
 
 ## Features
 
