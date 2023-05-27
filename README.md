@@ -74,6 +74,12 @@ You can click rendered text area to open popup
 - Perspective transform makes image warp to projected points
 - In memo feature, we can get mouse point coordinate from inversing transform matrix
 
+## Future Enhancements
+
+- Performance of detecting and decoding QR Code is not very good
+- I tried OpenCV and ZBar, both of them not works perfectly
+- This project can add more features from various type of QR Code information
+
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
