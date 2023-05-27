@@ -33,7 +33,7 @@ iPhone Camera | QRCode Visualizer
 ### Prerequisites
 
 ```
-pip3 -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ### Run
